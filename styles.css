@@ -16,6 +16,126 @@ body {
  
     min-height: 100vh;
 }
+.grid-wrapper {
+    position: relative;
+    width: 400px;
+    height: 500px;
+  
+    margin-bottom: 20px;
+    overflow: hidden; /* important to clip anything extra */
+}
+
+.grid-container {
+    position: relative;
+    width: 100%;
+    height: 100%; 
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500"><defs><radialGradient id="ocean" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%230077be;stop-opacity:1" /><stop offset="50%" style="stop-color:%2300a8e6;stop-opacity:1" /><stop offset="100%" style="stop-color:%23004d6b;stop-opacity:1" /></radialGradient></defs><rect width="500" height="500" fill="url(%23ocean)"/><circle cx="250" cy="250" r="120" fill="none" stroke="%2300d4ff" stroke-width="3" opacity="0.7"/><circle cx="250" cy="250" r="80" fill="none" stroke="%2300d4ff" stroke-width="2" opacity="0.5"/><circle cx="250" cy="250" r="40" fill="none" stroke="%2300d4ff" stroke-width="1" opacity="0.3"/></svg>');
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); 
+    grid-template-rows: repeat(10, 1fr);   
+    border: 2px solid #333;
+}
+
+
+        .cell {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .cell.filled {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        .cell.green-letter {
+            background-color: rgba(144, 238, 144, 0.9);
+        }
+
+        .cell.orange-letter {
+            background-color: rgba(255, 218, 185, 0.9);
+        }
+
+        .cell {
+            overflow: visible;
+        }
+
+        
+        .circular-border {
+            position: absolute;
+            top: -8px;
+            left: -14px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: 2px solid;
+            z-index: 1;
+            pointer-events: none;
+            box-sizing: border-box;
+        }
+
+        .circular-border.orange {
+            border-color: #ff8c00;
+            background: rgba(255, 140, 0, 0.1);
+        }
+
+        .circular-border.green {
+            border-color: #32cd32;
+            background: rgba(50, 205, 50, 0.1);
+        }
+
+      
+        .cell-number {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500px;
+            z-index: 10;
+          
+        }
+
+        .cell-number.orange {
+           
+            color: black;
+            /* border-color: #ff8c00; */
+        }
+
+        .cell-number.green {
+          
+            color: black;
+            /* border-color: #32cd32; */
+        }
+
+        @keyframes water-ripple {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .grid-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            animation: water-ripple 3s ease-in-out infinite;
+            pointer-events: none;
+        }
 
 /* Header */
 .header {
@@ -105,14 +225,14 @@ body {
 }
 
 
-.grid-container {
+/* .grid-container {
     position: relative;
     width: 100%;
     aspect-ratio: 1;
     margin-bottom: 20px;
     border-radius: 12px;
     overflow: hidden;
-}
+} */
 
 .background-image {
     position: absolute;
@@ -179,7 +299,7 @@ body {
     left: 2px;
     font-size: 10px;
     color: white;
-    background: rgba(0, 0, 0, 0.5);
+    
     border-radius: 50%;
     width: 14px;
     height: 14px;
